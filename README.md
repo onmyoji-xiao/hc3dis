@@ -14,8 +14,8 @@
 git clone https://github.com/onmyoji-xiao/hc3dis.git
 cd hc3dis/
 
-conda create -n gssplat python=3.10
-conda activate gssplat
+conda create -n hc3dis python=3.10
+conda activate hc3dis
 
 pip install torch==2.2.1 torchvision==0.17.1 --index-url https://download.pytorch.org/whl/cu121
 pip install -r requirement.txt
