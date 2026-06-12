@@ -1,0 +1,9 @@
+
+dataset: scannet
+image_root: /home/xf/datasets/ScanNet/scannet_rgbd_sample
+pc_root: /home/xf/datasets/ScanNet/scannet_pc
+mask_root: ../mask2former_res/scannet #../sam_res/sam2 #
+cropformer_path: ./Mask2Former_hornet_3x_576d0b.pth
+
+step: 1
+

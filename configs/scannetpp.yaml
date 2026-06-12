@@ -1,0 +1,8 @@
+
+dataset: scannetpp
+root: /home/xf/datasets/ScanNetPP/data_sample
+pc_root: /home/xf/datasets/ScanNetPP/pcld_0.25
+mask_root: ../mask2former_res/scannetpp
+cropformer_path: ./Mask2Former_hornet_3x_576d0b.pth
+
+step: 2
