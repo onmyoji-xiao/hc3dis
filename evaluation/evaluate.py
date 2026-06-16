@@ -12,11 +12,11 @@ dataset = 'scannet'
 parser = argparse.ArgumentParser()
 
 #parser.add_argument('--pred_path', default=f'/home/xf/codes/3dvg/MaskClustering-main/data/prediction/scannet_class_agnostic')
-parser.add_argument('--pred_path', default=f'../data/prediction_test/{dataset}_class_agnostic',help='path to directory of predicted .txt files')
+parser.add_argument('--pred_path', default=f'../data/prediction/{dataset}_class_agnostic',help='path to directory of predicted .txt files')
 parser.add_argument('--gt_path', default=f'../data/{dataset}/gt',
                     help='path to directory of ground truth .txt files')
 parser.add_argument('--dataset', default=f'{dataset}',
-                    help='type of dataset, e.g. matterport3d, scannet, etc.')
+                    help='type of dataset, e.g. scannet, etc.')
 parser.add_argument('--output_file', default='./output', help='path to output sfile')
 parser.add_argument('--no_class', action='store_true', help='class agnostic evaluation')
 opt = parser.parse_args()
@@ -24,10 +24,9 @@ opt.no_class = True
 
 
 def write_scene_ap_to_csv(scene_ap_list, csv_filename):
-    """将(filename, ap)的列表写入CSV文件"""
     with open(csv_filename, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerow(['filename', 'ap'])  # 写入表头
+        writer.writerow(['filename', 'ap'])
         for filename, ap in scene_ap_list:
             writer.writerow([filename, ap])
 
@@ -39,37 +38,18 @@ def main():
     print('start evaluating:', opt.pred_path.split('/')[-1])
     pred_files = [f for f in sorted(os.listdir(opt.pred_path)) if f.split('.')[0] in val_scenes and
                   f.endswith('.npz') and not f.startswith('semantic_instance_evaluation')]
-    # pred_files = ['1ada7a0617.npz']
 
-    scene_ap_list=[]
-    for file in pred_files[:]:
-         pred_files = [file]
-         gt_files = []
-         print(file)
-         for i in range(len(pred_files)):
-             gt_file = os.path.join(opt.gt_path, pred_files[i].replace('.npz', '.txt'))
-             if not os.path.isfile(gt_file):
-                 print('Result file {} does not match any gt file'.format(pred_files[i]))
-                 raise NotImplementedError
-             gt_files.append(gt_file)
-
-             pred_files[i] = os.path.join(opt.pred_path, pred_files[i])
-         ap=evaluate(pred_files, gt_files, opt.pred_path, opt.output_file)
-         scene_name = file.replace('.npz', '')
-         scene_ap_list.append((scene_name, ap))
-    write_scene_ap_to_csv(scene_ap_list, './hc_scene_ap.csv')
-
-    # pred_files = pred_files[:]
-    # gt_files = []
-    # for i in range(len(pred_files)):
-    #     gt_file = os.path.join(opt.gt_path, pred_files[i].replace('.npz', '.txt'))
-    #     if not os.path.isfile(gt_file):
-    #         print('Result file {} does not match any gt file'.format(pred_files[i]))
-    #         raise NotImplementedError
-    #     gt_files.append(gt_file)
-    #     pred_files[i] = os.path.join(opt.pred_path, pred_files[i])
-    # ap = evaluate(pred_files, gt_files, opt.pred_path, opt.output_file)
-    # # print('save results to', opt.output_file)
+    pred_files = pred_files[:]
+    gt_files = []
+    for i in range(len(pred_files)):
+        gt_file = os.path.join(opt.gt_path, pred_files[i].replace('.npz', '.txt'))
+        if not os.path.isfile(gt_file):
+            print('Result file {} does not match any gt file'.format(pred_files[i]))
+            raise NotImplementedError
+        gt_files.append(gt_file)
+        pred_files[i] = os.path.join(opt.pred_path, pred_files[i])
+    ap = evaluate(pred_files, gt_files, opt.pred_path, opt.output_file)
+    print('save results to', opt.output_file)
 
 # ---------- Label info ---------- #
 from evaluation.constants import MATTERPORT_LABELS, MATTERPORT_IDS, SCANNET_LABELS, SCANNET_IDS, SCANNETPP_LABELS, \

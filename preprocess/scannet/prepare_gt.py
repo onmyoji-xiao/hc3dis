@@ -10,9 +10,9 @@ import sys
 sys.path.append('../..')
 from evaluation.constants import SCANNET_IDS
 
-raw_data_dir = '/home/xf/codes/DataSet/ScanNet_PC'
+raw_data_dir = '../../datasets/ScanNet/scannet_pc'
 gt_dir = '../../data/scannet/gt'
-label_map_file = '/home/xf/codes/DataSet/scannetv2-labels.combined.tsv'
+label_map_file = '../datasets/ScanNet/scannetv2-labels.combined.tsv'
 split_file_path = '../../splits/scannet.txt'
 
 CLOUD_FILE_PFIX = '_vh_clean_2'

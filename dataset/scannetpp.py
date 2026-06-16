@@ -119,7 +119,6 @@ class ScanNetPPDataset:
         self.segmentation_dir = f'{args.mask_root}/{args.seq_name}'
         self.point_cloud_path = f'{args.pc_root}/{args.seq_name}.pth'
         self.load_meta_data()
-        self.mesh_path =f'/home/xf/datasets/ScanNetPP/data/{args.seq_name}/scans/mesh_aligned_0.05.ply'
 
         self.depth_scale = 1000.0
         self.image_size = (1920, 1440)
