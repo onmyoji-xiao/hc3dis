@@ -21,8 +21,7 @@ pip install torch==2.2.1 torchvision==0.17.1 --index-url https://download.pytorc
 pip install -r requirement.txt
 
 ```
-# Installing PyTorch3D
-**Download the pre-built package**  
+**Installing PyTorch3D**  
  Visit the official PyTorch3D conda channel and download the package matching your environment:
  ```
  # For Python 3.10 + PyTorch 2.2.0 + CUDA 12.1
