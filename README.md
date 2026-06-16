@@ -22,7 +22,6 @@ pip install -r requirement.txt
 
 ```
 **Installing PyTorch3D**  
- Visit the official PyTorch3D conda channel and download the package matching your environment:
  ```
  # For Python 3.10 + PyTorch 2.2.0 + CUDA 12.1
  wget https://anaconda.org/pytorch3d/pytorch3d/0.7.8/download/linux-64/pytorch3d-0.7.8-py310_cu121_pyt220.tar.bz2
